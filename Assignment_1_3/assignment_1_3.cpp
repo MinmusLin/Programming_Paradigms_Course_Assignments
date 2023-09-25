@@ -2,7 +2,8 @@
  * Project Name:  Assignment_1_3
  * File Name:     assignment_1_3.cpp
  * File Function: Problem solution
- * Update Date:   2023/9/24
+ * Author:        Jishen Lin (林继申)
+ * Update Date:   2023/9/25
  ****************************************************************/
 
 /****************************************************************
