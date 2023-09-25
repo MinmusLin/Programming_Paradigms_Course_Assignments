@@ -1,20 +1,20 @@
-﻿/****************************************************************
+/****************************************************************
  * Project Name:  Assignment_1_2
  * File Name:     assignment_1_2.cpp
  * File Function: Problem solution
- * Author:        Jishen Lin (林继申)
- * Update Date:   2023/9/25
+ * Author:        Jishen Lin (�ּ���)
+ * Update Date:   2023/9/26
  ****************************************************************/
 
 /****************************************************************
  * Problem Description
  ****************************************************************/
 
-// 给定⼀个数组 prices ，它的第 i 个元素 prices[i] 表示⼀⽀给定股票第 i 天的价格。
-// 你只能选择某⼀天买⼊这只股票，并选择在未来的某⼀个不同的日子卖出该股票。设计⼀个
-// 算法来计算你所能获取的最⼤利润。返回你可以从这笔交易中获取的最⼤利润。如果你不能
-// 获取任何利润，返回 0 。
-// 提示：
+// ����һ������ prices �����ĵ� i ��Ԫ�� prices[i] ��ʾһ֧������Ʊ�� i ��ļ۸�
+// ��ֻ��ѡ��ĳһ��������ֻ��Ʊ����ѡ����δ����ĳһ����ͬ�����������ù�Ʊ�����һ��
+// �㷨�����������ܻ�ȡ��������󡣷�������Դ���ʽ����л�ȡ�������������㲻��
+// ��ȡ�κ����󣬷��� 0 ��
+// ��ʾ��
 //     1 <= prices.length <= 10^5
 //     0 <= prices[i] <= 10^4
 
@@ -25,8 +25,9 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <limits>
 
- /* Define Solution class */
+/* Define Solution class */
 template <typename T>
 class Solution {
 private:

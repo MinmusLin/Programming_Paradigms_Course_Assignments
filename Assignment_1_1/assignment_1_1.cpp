@@ -1,18 +1,18 @@
-ï»¿/****************************************************************
+/****************************************************************
  * Project Name:  Assignment_1_1
  * File Name:     assignment_1_1.cpp
  * File Function: Problem solution
- * Author:        Jishen Lin (æ—ç»§ç”³)
- * Update Date:   2023/9/25
+ * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * Update Date:   2023/9/26
  ****************************************************************/
 
 /****************************************************************
  * Problem Description
  ****************************************************************/
 
-// ç»™å®šâ¼€ä¸ªæ•´æ•°æ•°ç»„ prices ï¼Œè¡¨ç¤ºè¿ç»­â¼å¤©çš„è‚¡ç¥¨ä»·æ ¼ã€‚è¿”å›â¼€ä¸ªæ•°ç»„ answer ï¼Œå…¶ä¸­ answer[i] æ˜¯
-// æŒ‡å¯¹äºç¬¬ i å¤©ï¼Œè‚¡ä»·ä¸‹â¼€æ¬¡ä¸Šæ¶¨æ˜¯åœ¨â¼å¤©åã€‚å¦‚æœåœ¨è¿™ä¹‹åè‚¡ä»·éƒ½ä¸ä¼šä¸Šæ¶¨ï¼Œè¯·åœ¨è¯¥ä½ç½®â½¤ 0 æ¥ä»£æ›¿ã€‚
-// æç¤ºï¼š
+// ¸ø¶¨Ò»¸öÕûÊıÊı×é prices £¬±íÊ¾Á¬Ğø¼¸ÌìµÄ¹ÉÆ±¼Û¸ñ¡£·µ»ØÒ»¸öÊı×é answer £¬ÆäÖĞ answer[i] ÊÇ
+// Ö¸¶ÔÓÚµÚ i Ìì£¬¹É¼ÛÏÂÒ»´ÎÉÏÕÇÊÇÔÚ¼¸Ììºó¡£Èç¹ûÔÚÕâÖ®ºó¹É¼Û¶¼²»»áÉÏÕÇ£¬ÇëÔÚ¸ÃÎ»ÖÃÓÃ 0 À´´úÌæ¡£
+// ÌáÊ¾£º
 //     1 <= prices.length <= 10^5
 //     30 <= prices[i] <= 100
 
@@ -24,6 +24,30 @@
 #include <sstream>
 #include <vector>
 #include <stack>
+#include <limits>
+
+/*
+ * Function Name:    operator<<
+ * Function:         Overload operator <<
+ * Input Parameters: std::ostream& out
+ *                   const std::vector<T>& vectorVariable
+ * Return Value:     out
+ */
+template <typename T>
+std::ostream& operator<<(std::ostream& out, const std::vector<T>& vectorVariable)
+{
+    /* Check if the vector is empty */
+    if (vectorVariable.empty()) {
+        std::cerr << "Vector is empty." << std::endl;
+    }
+    else {
+        out << "[" << vectorVariable[0];
+        for (unsigned int count = 1; count < vectorVariable.size(); count++)
+            out << "," << vectorVariable[count];
+        out << "]";
+    }
+    return out;
+}
 
 /* Define Solution class */
 template <typename T>
@@ -88,7 +112,7 @@ public:
         /* Return true to indicate valid input */
         return true;
     }
-    
+
     /*
      * Function Name:    nextIncrease
      * Function:         Calculate next increase
@@ -141,29 +165,6 @@ public:
 };
 
 /*
- * Function Name:    operator<<
- * Function:         Overload operator <<
- * Input Parameters: std::ostream& out
- *                   const std::vector<T>& vectorVariable
- * Return Value:     out
- */
-template <typename T>
-std::ostream& operator<<(std::ostream& out, const std::vector<T>& vectorVariable)
-{
-    /* Check if the vector is empty */
-    if (vectorVariable.empty()) {
-        std::cerr << "Vector is empty." << std::endl;
-    }
-    else {
-        out << "[" << vectorVariable[0];
-        for (unsigned int count = 1; count < vectorVariable.size(); count++)
-            out << "," << vectorVariable[count];
-        out << "]";
-    }
-    return out;
-}
-
-/*
  * Function Name:    main
  * Function:         Main function
  * Return Value:     0
@@ -180,7 +181,7 @@ int main()
     while (!solution.input(30, 100, 100000U)) {
         continue;
     }
-    
+
     /* Output result */
     std::cout << "Output:" << std::endl;
     std::cout << "Increase Vector: " << solution.nextIncrease(solution.getVec()) << std::endl;

@@ -1,22 +1,22 @@
-ï»¿/****************************************************************
+/****************************************************************
  * Project Name:  Assignment_1_3
  * File Name:     assignment_1_3.cpp
  * File Function: Problem solution
- * Author:        Jishen Lin (æ—ç»§ç”³)
- * Update Date:   2023/9/25
+ * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * Update Date:   2023/9/26
  ****************************************************************/
 
 /****************************************************************
  * Problem Description
  ****************************************************************/
 
-// ç»™å®šâ¼€ä¸ªæ•´æ•°æ•°ç»„ prices ï¼Œå…¶ä¸­ç¬¬ prices[i] è¡¨ç¤ºç¬¬ i å¤©çš„è‚¡ç¥¨ä»·æ ¼ã€‚
-// è®¾è®¡â¼€ä¸ªç®—æ³•è®¡ç®—å‡ºæœ€â¼¤åˆ©æ¶¦ã€‚åœ¨æ»¡â¾œä»¥ä¸‹çº¦æŸæ¡ä»¶ä¸‹ï¼Œä½ å¯ä»¥å°½å¯èƒ½åœ°å®Œ
-// æˆæ›´å¤šçš„äº¤æ˜“ï¼ˆå¤šæ¬¡ä¹°å–â¼€â½€è‚¡ç¥¨ï¼‰ï¼š
-//     å–å‡ºè‚¡ç¥¨åï¼Œä½ â½†æ³•åœ¨ç¬¬â¼†å¤©ä¹°â¼Šè‚¡ç¥¨ï¼ˆå³å†·å†»æœŸä¸º 1 å¤©ï¼‰ã€‚
-// æ³¨æ„ï¼š
-//     ä½ ä¸èƒ½åŒæ—¶å‚ä¸å¤šç¬”äº¤æ˜“ï¼ˆä½ å¿…é¡»åœ¨å†æ¬¡è´­ä¹°å‰å‡ºå”®æ‰ä¹‹å‰çš„è‚¡ç¥¨ï¼‰ã€‚
-// æç¤ºï¼š
+// ¸ø¶¨Ò»¸öÕûÊıÊı×é prices £¬ÆäÖĞµÚ prices[i] ±íÊ¾µÚ i ÌìµÄ¹ÉÆ±¼Û¸ñ¡£
+// Éè¼ÆÒ»¸öËã·¨¼ÆËã³ö×î´óÀûÈó¡£ÔÚÂú×ãÒÔÏÂÔ¼ÊøÌõ¼şÏÂ£¬Äã¿ÉÒÔ¾¡¿ÉÄÜµØÍê
+// ³É¸ü¶àµÄ½»Ò×£¨¶à´ÎÂòÂôÒ»Ö§¹ÉÆ±£©£º
+//     Âô³ö¹ÉÆ±ºó£¬ÄãÎŞ·¨ÔÚµÚ¶şÌìÂòÈë¹ÉÆ±£¨¼´Àä¶³ÆÚÎª 1 Ìì£©¡£
+// ×¢Òâ£º
+//     Äã²»ÄÜÍ¬Ê±²ÎÓë¶à±Ê½»Ò×£¨Äã±ØĞëÔÚÔÙ´Î¹ºÂòÇ°³öÊÛµôÖ®Ç°µÄ¹ÉÆ±£©¡£
+// ÌáÊ¾£º
 //     1 <= prices.length <= 5000
 //     0 <= prices[i] <= 1000
 
@@ -27,6 +27,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <limits>
 
 /* Define Solution class */
 template <typename T>
@@ -120,7 +121,7 @@ public:
             statusBuy = std::max(tmp, statusNotHolding) - prices[count];
             statusNotHolding = std::max(tmp, statusNotHolding);
         }
-        
+
         /* Return the maximum profit */
         return std::max(statusNotHolding, std::max(statusSell, statusFreeze));
     }
@@ -175,7 +176,7 @@ int main()
     while (!solution.input(0, 1000, 5000U)) {
         continue;
     }
-    
+
     /* Output result */
     std::cout << "Output:" << std::endl;
     std::cout << "Maximum Profit: " << solution.maxProfit(solution.getVec()) << std::endl;
