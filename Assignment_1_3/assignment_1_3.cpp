@@ -10,9 +10,10 @@
  * Problem Description
  ****************************************************************/
 
-// 给定一个整数数组 prices ，其中第 prices[i] 表示第 i 天的股票价格。
-// 设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地完
-// 成更多的交易（多次买卖一支股票）：
+// 买卖股票的最佳时机含冷冻期
+//     给定一个整数数组 prices ，其中第 prices[i] 表示第 i 天的股票价
+// 格。设计一个算法计算出最大利润。在满足以下约束条件下，你可以尽可能地
+// 完成更多的交易（多次买卖一支股票）：
 //     卖出股票后，你无法在第二天买入股票（即冷冻期为 1 天）。
 // 注意：
 //     你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
@@ -79,12 +80,16 @@ public:
             }
             else if (num < lowerLimit || num > upperLimit) { // Check if the number is outside the valid range
                 std::cerr << "Error: Input data is not within the valid range, please check input data and try again." << std::endl;
+                iss.clear();
+                iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 vec.clear();
                 return false; // Return false to indicate invalid input
             }
             else { // Valid input
                 vec.push_back(num);
-            } // Check for end of input or maximum input length
+            }
+
+            /* Check for end of input or maximum input length */
             if (iss.eof() || vec.size() >= maxLength) {
                 break;
             }

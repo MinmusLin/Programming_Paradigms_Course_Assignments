@@ -10,8 +10,10 @@
  * Problem Description
  ****************************************************************/
 
-// 给定一个整数数组 prices ，表示连续几天的股票价格。返回一个数组 answer ，其中 answer[i] 是
-// 指对于第 i 天，股价下一次上涨是在几天后。如果在这之后股价都不会上涨，请在该位置用 0 来代替。
+// 股票价格的下一次上涨
+//     给定一个整数数组 prices ，表示连续几天的股票价格。返回一个数组 answer ，
+// 其中 answer[i] 是指对于第 i 天，股价下一次上涨是在几天后。如果在这之后股价都
+// 不会上涨，请在该位置用 0 来代替。
 // 提示：
 //     1 <= prices.length <= 10^5
 //     30 <= prices[i] <= 100
@@ -98,12 +100,16 @@ public:
             }
             else if (num < lowerLimit || num > upperLimit) { // Check if the number is outside the valid range
                 std::cerr << "Error: Input data is not within the valid range, please check input data and try again." << std::endl;
+                iss.clear();
+                iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 vec.clear();
                 return false; // Return false to indicate invalid input
             }
             else { // Valid input
                 vec.push_back(num);
-            } // Check for end of input or maximum input length
+            }
+
+            /* Check for end of input or maximum input length */
             if (iss.eof() || vec.size() >= maxLength) {
                 break;
             }
