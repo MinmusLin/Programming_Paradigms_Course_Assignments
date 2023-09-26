@@ -30,11 +30,11 @@
  * Function Name:    operator<<
  * Function:         Overload operator <<
  * Input Parameters: std::ostream& out
- *                   const std::vector<T>& vectorVariable
+ *                   const std::vector<Type>& vectorVariable
  * Return Value:     out
  */
-template <typename T>
-std::ostream& operator<<(std::ostream& out, const std::vector<T>& vectorVariable)
+template <typename Type>
+std::ostream& operator<<(std::ostream& out, const std::vector<Type>& vectorVariable)
 {
     /* Check if the vector is empty */
     if (vectorVariable.empty()) {
@@ -50,10 +50,10 @@ std::ostream& operator<<(std::ostream& out, const std::vector<T>& vectorVariable
 }
 
 /* Define Solution class */
-template <typename T>
+template <typename Type>
 class Solution {
 private:
-    std::vector<T> vec;
+    std::vector<Type> vec;
 public:
     /*
      * Function Name:    getVec
@@ -61,7 +61,7 @@ public:
      * Input Parameters: void
      * Return Value:     private vector variable
      */
-    const std::vector<T>& getVec() const
+    const std::vector<Type>& getVec(void) const
     {
         return vec;
     }
@@ -69,13 +69,13 @@ public:
     /*
      * Function Name:    input
      * Function:         Input data
-     * Input Parameters: T lowerLimit: the lower limit of input data, used to verify the validity of the input data
-     *                   T upperLimit: the upper limit of input data, used to verify the validity of the input data
+     * Input Parameters: Type lowerLimit: the lower limit of input data, used to verify the validity of the input data
+     *                   Type upperLimit: the upper limit of input data, used to verify the validity of the input data
      *                   unsigned int maxLength: the maximum length of input data, if exceeded, it will be truncated
      * Return Value:     true: input data is valid
      *                   false: input data is invalid
      */
-    bool input(T lowerLimit, T upperLimit, unsigned int maxLength)
+    bool input(Type lowerLimit, Type upperLimit, unsigned int maxLength)
     {
         /* Read a line from standard input (cin) */
         std::string str;
@@ -83,7 +83,7 @@ public:
 
         /* Create a string stream to parse the input */
         std::istringstream iss(str);
-        T num; // Variable to hold the parsed number
+        Type num; // Variable to hold the parsed number
 
         /* Loop to read and process each number from the input */
         while (true) {
@@ -116,10 +116,10 @@ public:
     /*
      * Function Name:    nextIncrease
      * Function:         Calculate next increase
-     * Input Parameters: const std::vector<T>& prices
+     * Input Parameters: const std::vector<Type>& prices
      * Return Value:     increase vector
      */
-    std::vector<int> nextIncrease(const std::vector<T>& prices)
+    std::vector<int> nextIncrease(const std::vector<Type>& prices)
     {
         std::vector<int> increaseVector(prices.size(), 0); // The increase vector with zeros
         std::stack<int> indices; //Stack to store indices
@@ -139,11 +139,11 @@ public:
     /*
      * Function Name:    nextIncrease
      * Function:         Calculate next increase
-     * Input Parameters: const T* prices
+     * Input Parameters: const Type* prices
      *                   int length
      * Return Value:     increase vector
      */
-    std::vector<int> nextIncrease(const T* prices, int length)
+    std::vector<int> nextIncrease(const Type* prices, int length)
     {
         std::vector<int> increaseVector(length, 0); // The increase vector with zeros
         std::stack<int> indices; //Stack to store indices
@@ -161,7 +161,7 @@ public:
     }
 
     /* Friend function declaration */
-    friend std::ostream& operator<<(std::ostream& out, const std::vector<T>& vectorVariable);
+    friend std::ostream& operator<<(std::ostream& out, const std::vector<Type>& vectorVariable);
 };
 
 /*
