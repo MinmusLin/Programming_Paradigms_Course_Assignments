@@ -3,7 +3,7 @@
  * File Name:     assignment_1_3.cpp
  * File Function: Problem solution
  * Author:        Jishen Lin (¡÷ºÃ…Í)
- * Update Date:   2023/9/26
+ * Update Date:   2023/9/27
  ****************************************************************/
 
 /****************************************************************
@@ -29,6 +29,11 @@
 #include <sstream>
 #include <vector>
 #include <limits>
+
+using std::cout;
+using std::cin;
+using std::cerr;
+using std::endl;
 
 /* Define Solution class */
 template <typename Type>
@@ -61,7 +66,7 @@ public:
     {
         /* Read a line from standard input (cin) */
         std::string str;
-        std::getline(std::cin, str);
+        std::getline(cin, str);
 
         /* Create a string stream to parse the input */
         std::istringstream iss(str);
@@ -72,14 +77,14 @@ public:
             /* Read a number from the input stream */
             iss >> num;
             if (iss.fail()) { // Check if the read operation failed (invalid data type)
-                std::cerr << "Error: Input data is invalid, please check data type and try again." << std::endl;
+                cerr << "Error: Input data is invalid, please check data type and try again." << endl;
                 iss.clear();
                 iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 vec.clear();
                 return false; // Return false to indicate invalid input
             }
             else if (num < lowerLimit || num > upperLimit) { // Check if the number is outside the valid range
-                std::cerr << "Error: Input data is not within the valid range, please check input data and try again." << std::endl;
+                cerr << "Error: Input data is not within the valid range, please check input data and try again." << endl;
                 iss.clear();
                 iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 vec.clear();
@@ -93,6 +98,15 @@ public:
             if (iss.eof() || vec.size() >= maxLength) {
                 break;
             }
+        }
+
+        /* Check the length of vector */
+        if (vec.size() <= 0) {
+            cerr << "Error: Input data is invalid, please check input data and try again." << endl;
+            iss.clear();
+            iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            vec.clear();
+            return false; // Return false to indicate invalid input
         }
 
         /* Return true to indicate valid input */
@@ -175,16 +189,16 @@ int main()
     Solution<int> solution;
 
     /* Input data */
-    std::cout << "Input:" << std::endl;
-    std::cout << "(1 <= prices.length <= 5000, if exceeded, it will be truncated.)" << std::endl;
-    std::cout << "(0 <= prices[i] <= 1000, please separate the data with spaces and press Enter.)" << std::endl;
+    cout << "Input:" << endl;
+    cout << "(1 <= prices.length <= 5000, if exceeded, it will be truncated.)" << endl;
+    cout << "(0 <= prices[i] <= 1000, please separate the data with spaces and press Enter.)" << endl;
     while (!solution.input(0, 1000, 5000U)) {
         continue;
     }
 
     /* Output result */
-    std::cout << "Output:" << std::endl;
-    std::cout << "Maximum Profit: " << solution.maxProfit(solution.getVec()) << std::endl;
+    cout << "Output:" << endl;
+    cout << "Maximum Profit: " << solution.maxProfit(solution.getVec()) << endl;
 
     // Notes:
     //     To enhance the versatility and extensibility of the code, you can also call the

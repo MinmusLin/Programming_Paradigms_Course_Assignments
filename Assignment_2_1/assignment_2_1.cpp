@@ -3,7 +3,7 @@
  * File Name:     assignment_2_1.cpp
  * File Function: Problem solution
  * Author:        Jishen Lin (¡÷ºÃ…Í)
- * Update Date:   2023/9/26
+ * Update Date:   2023/9/27
  ****************************************************************/
 
 /****************************************************************
@@ -27,6 +27,11 @@
 #include <sstream>
 #include <vector>
 #include <limits>
+
+using std::cout;
+using std::cin;
+using std::cerr;
+using std::endl;
 
 /* Define Interval structure */
 typedef struct {
@@ -105,7 +110,7 @@ public:
     {
         /* Read a line from standard input (cin) */
         std::string str;
-        std::getline(std::cin, str);
+        std::getline(cin, str);
 
         /* Create a string stream and a temporary input variable to parse the input */
         std::istringstream iss(str);
@@ -117,14 +122,14 @@ public:
             /* Read a number from the input stream */
             iss >> num;
             if (iss.fail()) { // Check if the read operation failed (invalid data type)
-                std::cerr << "Error: Input data is invalid, please check data type and try again." << std::endl;
+                cerr << "Error: Input data is invalid, please check data type and try again." << endl;
                 iss.clear();
                 iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 vec.clear();
                 return false; // Return false to indicate invalid input
             }
             else if (num < lowerLimit || num > upperLimit) { // Check if the number is outside the valid range
-                std::cerr << "Error: Input data is not within the valid range, please check input data and try again." << std::endl;
+                cerr << "Error: Input data is not within the valid range, please check input data and try again." << endl;
                 iss.clear();
                 iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 vec.clear();
@@ -137,7 +142,7 @@ public:
                 else {
                     tmpInput.endTime = num;
                     if (tmpInput.endTime <= tmpInput.startTime) { // Check if the end time is earlier than the start time
-                        std::cerr << "Error: The end time is earlier than the start time, please check input data and try again." << std::endl;
+                        cerr << "Error: The end time is earlier than the start time, please check input data and try again." << endl;
                         iss.clear();
                         iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         vec.clear();
@@ -155,6 +160,15 @@ public:
             }
         }
 
+        /* Check the length of vector */
+        if (vec.size() <= 0) {
+            cerr << "Error: Input data is invalid, please check input data and try again." << endl;
+            iss.clear();
+            iss.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            vec.clear();
+            return false; // Return false to indicate invalid input
+        }
+
         /* Return true to indicate valid input */
         return true;
     }
@@ -170,7 +184,7 @@ public:
     {
         /* Check if the vector is empty */
         if (vec.empty()) {
-            std::cerr << "Vector is empty." << std::endl;
+            cerr << "Vector is empty." << endl;
             return false;
         }
         else {
@@ -202,17 +216,17 @@ int main()
     Solution<Interval> solution;
 
     /* Input data */
-    std::cout << "Input:" << std::endl;
-    std::cout << "(0 <= intervals.length <= 10^4, if exceeded, it will be truncated.)" << std::endl;
-    std::cout << "(intervals[i].length == 2, if exceeded, it will be truncated, if the last input data is a start time, it will be discarded.)" << std::endl;
-    std::cout << "(0 <= starti < endi <= 10^6, please separate the data with spaces and press Enter.)" << std::endl;
+    cout << "Input:" << endl;
+    cout << "(0 <= intervals.length <= 10^4, if exceeded, it will be truncated.)" << endl;
+    cout << "(intervals[i].length == 2, if exceeded, it will be truncated, if the last input data is a start time, it will be discarded.)" << endl;
+    cout << "(0 <= starti < endi <= 10^6, please separate the data with spaces and press Enter.)" << endl;
     while (!solution.input(0, 1000000, 10000U)) {
         continue;
     }
 
     /* Output result */
-    std::cout << "Output:" << std::endl;
-    std::cout << (solution.canWatchAllMovie() ? "true" : "false") << std::endl;
+    cout << "Output:" << endl;
+    cout << (solution.canWatchAllMovie() ? "true" : "false") << endl;
 
     /* Program ends */
     return 0;
