@@ -60,7 +60,7 @@ private:
             return;
         }
 
-        /* Choose the pivot element as the middle element's startTime in the vector */
+        /* Choose the pivot element as the middle element's start time in the vector */
         int pivot = vec[(left + right) / 2].startTime;
         int i = left;
         int j = right;
@@ -68,13 +68,13 @@ private:
         /* Rearrange elements around the pivot */
         while (i <= j) {
             while (vec[i].startTime < pivot) {
-                i++; //Find an element on the left side that is greater than or equal to the pivot
+                i++; // Find an element on the left side that is greater than or equal to the pivot
             }
             while (vec[j].startTime > pivot) {
-                j--; //Find an element on the right side that is less than or equal to the pivot
+                j--; // Find an element on the right side that is less than or equal to the pivot
             }
             if (i <= j) {
-                std::swap(vec[i], vec[j]); //Swap elements if needed to ensure elements on the left are less than or equal to the pivot
+                std::swap(vec[i], vec[j]); // Swap elements if needed to ensure elements on the left are less than or equal to the pivot
                 i++;
                 j--;
             }
@@ -233,7 +233,7 @@ int main()
 
     /* Output result */
     cout << "Output:" << endl;
-    cout << solution.minRoomNum() << endl;
+    cout << "Minimum Number of Screening Rooms: " << solution.minRoomNum() << endl;
 
     /* Program ends */
     return 0;
@@ -280,7 +280,7 @@ int main()
 
 // Test Case 8:
 // Description: Test the handling of input data with unreasonable length
-// Input: '\n'
+// Input: 10 '\n'
 // Expected Output: Error
 
 // Test Case 9:
