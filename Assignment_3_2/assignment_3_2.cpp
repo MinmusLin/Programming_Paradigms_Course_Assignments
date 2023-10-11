@@ -1,6 +1,6 @@
 /****************************************************************
- * Project Name:  Assignment_1_1
- * File Name:     assignment_1_1.cpp
+ * Project Name:  Assignment_3_2
+ * File Name:     assignment_3_2.cpp
  * File Function: Problem solution
  * Author:        Jishen Lin (林继申)
  * Update Date:   2023/10/11
@@ -10,13 +10,13 @@
  * Problem Description
  ****************************************************************/
 
-// 股票价格的下一次上涨
-//     给定一个整数数组 prices ，表示连续几天的股票价格。返回一个数组 answer ，
-// 其中 answer[i] 是指对于第 i 天，股价下一次上涨是在几天后。如果在这之后股价都
-// 不会上涨，请在该位置用 0 来代替。
+// 存在重复元素Ⅱ
+//     给你一个整数数组 nums 和一个整数 k ，判断数组中是否存在两个不同的
+// 索引 i 和 j ，使得 nums[i] == nums[j] ，并且 abs(i - j) <= k
 // 提示：
-//     1 <= prices.length <= 10^5
-//     30 <= prices[i] <= 100
+//     1 <= nums.length <= 10^5
+//     -10^9 <= nums[i] <= 10^9
+//     0 <= k <= 10^5
 
 /****************************************************************
  * Problem Solution
@@ -25,7 +25,6 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <stack>
 #include <limits>
 
 using std::cout;
@@ -33,46 +32,13 @@ using std::cin;
 using std::cerr;
 using std::endl;
 
-/*
- * Function Name:    operator<<
- * Function:         Overload operator <<
- * Input Parameters: std::ostream& out
- *                   const std::vector<Type>& vectorVariable
- * Return Value:     out
- */
-template <typename Type>
-std::ostream& operator<<(std::ostream& out, const std::vector<Type>& vectorVariable)
-{
-    /* Check if the vector is empty */
-    if (vectorVariable.empty()) {
-        cerr << "Vector is empty." << endl;
-    }
-    else {
-        out << "[" << vectorVariable[0];
-        for (unsigned int count = 1; count < vectorVariable.size(); count++)
-            out << "," << vectorVariable[count];
-        out << "]";
-    }
-    return out;
-}
-
 /* Define Solution class */
 template <typename Type>
 class Solution {
 private:
     std::vector<Type> vec;
+    Type m_k = 0;
 public:
-    /*
-     * Function Name:    getVec
-     * Function:         Get private vector variable
-     * Input Parameters: void
-     * Return Value:     private vector variable
-     */
-    const std::vector<Type>& getVec(void) const
-    {
-        return vec;
-    }
-
     /*
      * Function Name:    input
      * Function:         Input data
@@ -134,50 +100,54 @@ public:
     }
 
     /*
-     * Function Name:    nextIncrease
-     * Function:         Calculate next increase
-     * Input Parameters: const std::vector<Type>& prices
-     * Return Value:     increase vector
+     * Function Name:    inputK
+     * Function:         Input data k
+     * Input Parameters: Type lowerLimit: the lower limit of input data, used to verify the validity of the input data
+     *                   Type upperLimit: the upper limit of input data, used to verify the validity of the input data
+     * Return Value:     void
      */
-    std::vector<int> nextIncrease(const std::vector<Type>& prices)
+    void inputK(Type lowerLimit, Type upperLimit)
     {
-        std::vector<int> increaseVector(prices.size(), 0); // The increase vector with zeros
-        std::stack<int> indices; // Stack to store indices
-        for (unsigned int count = 0; count < prices.size(); count++) {
-            /* If the stack is not empty and the current price is greater than the price at the top of the stack */
-            while (!indices.empty() && prices[count] > prices[indices.top()]) {
-                increaseVector[indices.top()] = count - indices.top();
-                indices.pop();
+        while (true) {
+            cin >> m_k;
+            if (cin.good()) {
+                if (m_k >= lowerLimit && m_k <= upperLimit) {
+                    return;
+                }
+                else {
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cerr << "Error: Input data is not within the valid range, please check input data and try again." << endl;
+                }
             }
-
-            /* Push the current index onto the stack */
-            indices.push(count);
+            else {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cerr << "Error: Input data is invalid, please check data type and try again." << endl;
+            }
         }
-        return increaseVector;
     }
 
     /*
-     * Function Name:    nextIncrease
-     * Function:         Calculate next increase
-     * Input Parameters: const Type* prices
-     *                   int length
-     * Return Value:     increase vector
+     * Function Name:    checkDuplicateElement
+     * Function:         Check for duplicate elements
+     * Input Parameters: void
+     * Return Value:     true: existence of two indices meeting the criteria
+     *                   false: absence of two indices meeting the criteria
      */
-    std::vector<int> nextIncrease(const Type* prices, int length)
+    bool checkDuplicateElement()
     {
-        std::vector<int> increaseVector(length, 0); // The increase vector with zeros
-        std::stack<int> indices; // Stack to store indices
-        for (int count = 0; count < length; count++) {
-            /* If the stack is not empty and the current price is greater than the price at the top of the stack */
-            while (!indices.empty() && prices[count] > prices[indices.top()]) {
-                increaseVector[indices.top()] = count - indices.top();
-                indices.pop();
+        /* Iterate through the array */
+        for (unsigned int left = 0; left < vec.size(); left++) {
+            /* Iterate through elements to the right of the current element */
+            for (unsigned int right = left + 1; right < vec.size() && static_cast<int>(right - left) <= m_k; right++) {
+                /* Check if the current and right elements are equal */
+                if (vec[left] == vec[right]) {
+                    return true;
+                }
             }
-
-            /* Push the current index onto the stack */
-            indices.push(count);
         }
-        return increaseVector;
+        return false;
     }
 };
 
@@ -191,23 +161,22 @@ int main()
     /* Define solution object */
     Solution<int> solution;
 
-    /* Input data */
-    cout << "Input:" << endl;
-    cout << "(1 <= prices.length <= 10^5, if exceeded, it will be truncated.)" << endl;
-    cout << "(30 <= prices[i] <= 100, please separate the data with spaces and press Enter.)" << endl;
-    while (!solution.input(30, 100, 100000U)) {
+    /* Input integer array */
+    cout << "Input integer array:" << endl;
+    cout << "(1 <= nums.length <= 10^5, if exceeded, it will be truncated.)" << endl;
+    cout << "(-10^9 <= nums[i] <= 10^9, please separate the data with spaces and press Enter.)" << endl;
+    while (!solution.input(-1000000000, 1000000000, 100000U)) {
         continue;
     }
 
+    /* Input integer k */
+    cout << "Input integer k:" << endl;
+    cout << "(0 <= k <= 10^5, please input an integer and press Enter.)" << endl;
+    solution.inputK(0, 100000);
+
     /* Output result */
     cout << "Output:" << endl;
-    cout << "Increase Vector: " << solution.nextIncrease(solution.getVec()) << endl;
-
-    // Notes:
-    //     To enhance the versatility and extensibility of the code, you can also call the
-    //     std::vector<int> Solution::nextIncrease(const T* prices, int length) function to
-    //     handle cases where the parameter is an array, the input parameters are the array's
-    //     starting address and its length.
+    cout << "Whether there exist two indices meeting the criteria: " << (solution.checkDuplicateElement() ? "true" : "false") << endl;
 
     /* Program ends */
     return 0;
@@ -219,37 +188,37 @@ int main()
 
 // Test Case 1:
 // Description: Test the correctness of the algorithm
-// Input: 73 74 75 71 69 72 76 73 '\n'
-// Expected Output: [1,1,4,2,1,1,0,0]
+// Input: 1 2 3 1 '\n' 3 '\n'
+// Expected Output: true
 
 // Test Case 2:
 // Description: Test the correctness of the algorithm
-// Input: 30 40 50 60 '\n'
-// Expected Output: [1,1,1,0]
+// Input: 1 0 1 1 '\n' 1 '\n'
+// Expected Output: true
 
 // Test Case 3:
 // Description: Test the correctness of the algorithm
-// Input: 100 '\n'
-// Expected Output: [0]
+// Input: 1 2 3 1 2 3 '\n' 2 '\n'
+// Expected Output: false
 
 // Test Case 4:
 // Description: Test the handling of input data exceeding the upper limit
-// Input: 101 '\n'
+// Input: 2147483647 '\n'
 // Expected Output: Error
 
 // Test Case 5:
 // Description: Test the handling of input data exceeding the upper limit
-// Input: 50 60 120 50 80 '\n'
+// Input: 1 2 3 '\n' 100001 '\n'
 // Expected Output: Error
 
 // Test Case 6:
 // Description: Test the handling of input data below the lower limit
-// Input: 29 '\n'
+// Input: -2147483648 '\n'
 // Expected Output: Error
 
 // Test Case 7:
 // Description: Test the handling of input data below the lower limit
-// Input: 95 45 30 20 98 20 '\n'
+// Input: 1 2 3 '\n' -1 '\n'
 // Expected Output: Error
 
 // Test Case 8:
@@ -259,10 +228,10 @@ int main()
 
 // Test Case 9:
 // Description: Test the handling of incorrect input data types
-// Input: a bcd '\n'
+// Input: 1.5 '\n'
 // Expected Output: Error
 
 // Test Case 10:
 // Description: Test the handling of incorrect input data types
-// Input: 50.5 '\n'
+// Input: 1 2 3 '\n' a '\n'
 // Expected Output: Error

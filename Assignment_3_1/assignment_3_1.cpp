@@ -1,6 +1,6 @@
 /****************************************************************
- * Project Name:  Assignment_1_1
- * File Name:     assignment_1_1.cpp
+ * Project Name:  Assignment_3_1
+ * File Name:     assignment_3_1.cpp
  * File Function: Problem solution
  * Author:        Jishen Lin (林继申)
  * Update Date:   2023/10/11
@@ -10,13 +10,12 @@
  * Problem Description
  ****************************************************************/
 
-// 股票价格的下一次上涨
-//     给定一个整数数组 prices ，表示连续几天的股票价格。返回一个数组 answer ，
-// 其中 answer[i] 是指对于第 i 天，股价下一次上涨是在几天后。如果在这之后股价都
-// 不会上涨，请在该位置用 0 来代替。
+// 存在重复元素Ⅰ
+//     给你一个整数数组 nums 。如果任意一值在数组中出现至少两次，返回 true ；
+// 如果数组中每个值仅出现一次，返回 false 。
 // 提示：
-//     1 <= prices.length <= 10^5
-//     30 <= prices[i] <= 100
+//     1 <= nums.length <= 10^5
+//     -10^9 <= nums[i] <= 10^9
 
 /****************************************************************
  * Problem Solution
@@ -25,36 +24,13 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
-#include <stack>
 #include <limits>
+#include <algorithm>
 
 using std::cout;
 using std::cin;
 using std::cerr;
 using std::endl;
-
-/*
- * Function Name:    operator<<
- * Function:         Overload operator <<
- * Input Parameters: std::ostream& out
- *                   const std::vector<Type>& vectorVariable
- * Return Value:     out
- */
-template <typename Type>
-std::ostream& operator<<(std::ostream& out, const std::vector<Type>& vectorVariable)
-{
-    /* Check if the vector is empty */
-    if (vectorVariable.empty()) {
-        cerr << "Vector is empty." << endl;
-    }
-    else {
-        out << "[" << vectorVariable[0];
-        for (unsigned int count = 1; count < vectorVariable.size(); count++)
-            out << "," << vectorVariable[count];
-        out << "]";
-    }
-    return out;
-}
 
 /* Define Solution class */
 template <typename Type>
@@ -62,17 +38,6 @@ class Solution {
 private:
     std::vector<Type> vec;
 public:
-    /*
-     * Function Name:    getVec
-     * Function:         Get private vector variable
-     * Input Parameters: void
-     * Return Value:     private vector variable
-     */
-    const std::vector<Type>& getVec(void) const
-    {
-        return vec;
-    }
-
     /*
      * Function Name:    input
      * Function:         Input data
@@ -134,50 +99,25 @@ public:
     }
 
     /*
-     * Function Name:    nextIncrease
-     * Function:         Calculate next increase
-     * Input Parameters: const std::vector<Type>& prices
-     * Return Value:     increase vector
+     * Function Name:    checkDuplicateElement
+     * Function:         Check for duplicate elements
+     * Input Parameters: void
+     * Return Value:     true: any value appears at least twice in the array
+     *                   false: each value in the array appears only once
      */
-    std::vector<int> nextIncrease(const std::vector<Type>& prices)
+    bool checkDuplicateElement()
     {
-        std::vector<int> increaseVector(prices.size(), 0); // The increase vector with zeros
-        std::stack<int> indices; // Stack to store indices
-        for (unsigned int count = 0; count < prices.size(); count++) {
-            /* If the stack is not empty and the current price is greater than the price at the top of the stack */
-            while (!indices.empty() && prices[count] > prices[indices.top()]) {
-                increaseVector[indices.top()] = count - indices.top();
-                indices.pop();
+        /* Sort the array */
+        std::vector<Type> vecCopy = vec;
+        sort(vecCopy.begin(), vecCopy.end());
+
+        /* Check for duplicate elements */
+        for (unsigned int count = 0; count < vecCopy.size() - 1; count++) {
+            if (vecCopy[count] == vecCopy[count + 1]) {
+                return true; // Found duplicate elements
             }
-
-            /* Push the current index onto the stack */
-            indices.push(count);
         }
-        return increaseVector;
-    }
-
-    /*
-     * Function Name:    nextIncrease
-     * Function:         Calculate next increase
-     * Input Parameters: const Type* prices
-     *                   int length
-     * Return Value:     increase vector
-     */
-    std::vector<int> nextIncrease(const Type* prices, int length)
-    {
-        std::vector<int> increaseVector(length, 0); // The increase vector with zeros
-        std::stack<int> indices; // Stack to store indices
-        for (int count = 0; count < length; count++) {
-            /* If the stack is not empty and the current price is greater than the price at the top of the stack */
-            while (!indices.empty() && prices[count] > prices[indices.top()]) {
-                increaseVector[indices.top()] = count - indices.top();
-                indices.pop();
-            }
-
-            /* Push the current index onto the stack */
-            indices.push(count);
-        }
-        return increaseVector;
+        return false; // Not found duplicate elements
     }
 };
 
@@ -193,21 +133,15 @@ int main()
 
     /* Input data */
     cout << "Input:" << endl;
-    cout << "(1 <= prices.length <= 10^5, if exceeded, it will be truncated.)" << endl;
-    cout << "(30 <= prices[i] <= 100, please separate the data with spaces and press Enter.)" << endl;
-    while (!solution.input(30, 100, 100000U)) {
+    cout << "(1 <= nums.length <= 10^5, if exceeded, it will be truncated.)" << endl;
+    cout << "(-10^9 <= nums[i] <= 10^9, please separate the data with spaces and press Enter.)" << endl;
+    while (!solution.input(-1000000000, 1000000000, 100000U)) {
         continue;
     }
 
     /* Output result */
     cout << "Output:" << endl;
-    cout << "Increase Vector: " << solution.nextIncrease(solution.getVec()) << endl;
-
-    // Notes:
-    //     To enhance the versatility and extensibility of the code, you can also call the
-    //     std::vector<int> Solution::nextIncrease(const T* prices, int length) function to
-    //     handle cases where the parameter is an array, the input parameters are the array's
-    //     starting address and its length.
+    cout << "Whether any value appears at least twice in the array: " << (solution.checkDuplicateElement() ? "true" : "false") << endl;
 
     /* Program ends */
     return 0;
@@ -219,37 +153,37 @@ int main()
 
 // Test Case 1:
 // Description: Test the correctness of the algorithm
-// Input: 73 74 75 71 69 72 76 73 '\n'
-// Expected Output: [1,1,4,2,1,1,0,0]
+// Input: 1 2 3 1 '\n'
+// Expected Output: true
 
 // Test Case 2:
 // Description: Test the correctness of the algorithm
-// Input: 30 40 50 60 '\n'
-// Expected Output: [1,1,1,0]
+// Input: 1 2 3 4 '\n'
+// Expected Output: false
 
 // Test Case 3:
 // Description: Test the correctness of the algorithm
-// Input: 100 '\n'
-// Expected Output: [0]
+// Input: 1 1 1 3 3 4 3 2 4 2 '\n'
+// Expected Output: true
 
 // Test Case 4:
 // Description: Test the handling of input data exceeding the upper limit
-// Input: 101 '\n'
+// Input: 2147483647 '\n'
 // Expected Output: Error
 
 // Test Case 5:
 // Description: Test the handling of input data exceeding the upper limit
-// Input: 50 60 120 50 80 '\n'
+// Input: 1 2147483648 2 3 '\n'
 // Expected Output: Error
 
 // Test Case 6:
 // Description: Test the handling of input data below the lower limit
-// Input: 29 '\n'
+// Input: -2147483648 '\n'
 // Expected Output: Error
 
 // Test Case 7:
 // Description: Test the handling of input data below the lower limit
-// Input: 95 45 30 20 98 20 '\n'
+// Input: 1 -2147483649 2 3 '\n'
 // Expected Output: Error
 
 // Test Case 8:
@@ -264,5 +198,5 @@ int main()
 
 // Test Case 10:
 // Description: Test the handling of incorrect input data types
-// Input: 50.5 '\n'
+// Input: 1.5 '\n'
 // Expected Output: Error
