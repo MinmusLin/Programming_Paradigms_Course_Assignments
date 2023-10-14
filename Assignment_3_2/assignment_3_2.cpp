@@ -3,7 +3,7 @@
  * File Name:     assignment_3_2.cpp
  * File Function: Problem solution
  * Author:        Jishen Lin (¡÷ºÃ…Í)
- * Update Date:   2023/10/11
+ * Update Date:   2023/10/14
  ****************************************************************/
 
 /****************************************************************
@@ -36,8 +36,40 @@ using std::endl;
 template <typename Type>
 class Solution {
 private:
+    /* Define private data members */
     std::vector<Type> vec;
     Type m_k = 0;
+
+    /*
+     * Function Name:    inputVariable
+     * Function:         Input data
+     * Input Parameters: Type& input: input variable
+     *                   Type lowerLimit: the lower limit of input data, used to verify the validity of the input data
+     *                   Type upperLimit: the upper limit of input data, used to verify the validity of the input data
+     * Return Value:     void
+     */
+    void inputVariable(Type& input, Type lowerLimit, Type upperLimit)
+    {
+        while (true) {
+            cin >> input;
+            if (cin.good()) {
+                if (input >= lowerLimit && input <= upperLimit) {
+                    return;
+                }
+                else {
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cerr << "Error: Input data is not within the valid range, please check input data and try again." << endl;
+                }
+            }
+            else {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cerr << "Error: Input data is invalid, please check data type and try again." << endl;
+            }
+        }
+    }
+
 public:
     /*
      * Function Name:    input
@@ -101,31 +133,14 @@ public:
 
     /*
      * Function Name:    inputK
-     * Function:         Input data k
+     * Function:         Input variable k
      * Input Parameters: Type lowerLimit: the lower limit of input data, used to verify the validity of the input data
      *                   Type upperLimit: the upper limit of input data, used to verify the validity of the input data
      * Return Value:     void
      */
     void inputK(Type lowerLimit, Type upperLimit)
     {
-        while (true) {
-            cin >> m_k;
-            if (cin.good()) {
-                if (m_k >= lowerLimit && m_k <= upperLimit) {
-                    return;
-                }
-                else {
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    cerr << "Error: Input data is not within the valid range, please check input data and try again." << endl;
-                }
-            }
-            else {
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                cerr << "Error: Input data is invalid, please check data type and try again." << endl;
-            }
-        }
+        inputVariable(m_k, lowerLimit, upperLimit);
     }
 
     /*

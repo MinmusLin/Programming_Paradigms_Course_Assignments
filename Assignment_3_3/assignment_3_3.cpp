@@ -3,7 +3,7 @@
  * File Name:     assignment_3_3.cpp
  * File Function: Problem solution
  * Author:        Jishen Lin (¡÷ºÃ…Í)
- * Update Date:   2023/10/11
+ * Update Date:   2023/10/14
  ****************************************************************/
 
 /****************************************************************
@@ -42,9 +42,41 @@ using std::endl;
 template <typename Type>
 class Solution {
 private:
+    /* Define private data members */
     std::vector<Type> vec;
     Type m_indexDiff = 0;
     Type m_valueDiff = 0;
+
+    /*
+     * Function Name:    inputVariable
+     * Function:         Input data
+     * Input Parameters: Type& input: input variable
+     *                   Type lowerLimit: the lower limit of input data, used to verify the validity of the input data
+     *                   Type upperLimit: the upper limit of input data, used to verify the validity of the input data
+     * Return Value:     void
+     */
+    void inputVariable(Type& input, Type lowerLimit, Type upperLimit)
+    {
+        while (true) {
+            cin >> input;
+            if (cin.good()) {
+                if (input >= lowerLimit && input <= upperLimit) {
+                    return;
+                }
+                else {
+                    cin.clear();
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    cerr << "Error: Input data is not within the valid range, please check input data and try again." << endl;
+                }
+            }
+            else {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cerr << "Error: Input data is invalid, please check data type and try again." << endl;
+            }
+        }
+    }
+
 public:
     /*
      * Function Name:    getVecLength
@@ -120,60 +152,26 @@ public:
 
     /*
      * Function Name:    inputIndexDiff
-     * Function:         Input data indexDiff
+     * Function:         Input variable indexDiff
      * Input Parameters: Type lowerLimit: the lower limit of input data, used to verify the validity of the input data
      *                   Type upperLimit: the upper limit of input data, used to verify the validity of the input data
      * Return Value:     void
      */
     void inputIndexDiff(Type lowerLimit, Type upperLimit)
     {
-        while (true) {
-            cin >> m_indexDiff;
-            if (cin.good()) {
-                if (m_indexDiff >= lowerLimit && m_indexDiff <= upperLimit) {
-                    return;
-                }
-                else {
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    cerr << "Error: Input data is not within the valid range, please check input data and try again." << endl;
-                }
-            }
-            else {
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                cerr << "Error: Input data is invalid, please check data type and try again." << endl;
-            }
-        }
+        inputVariable(m_indexDiff, lowerLimit, upperLimit);
     }
 
     /*
      * Function Name:    inputValueDiff
-     * Function:         Input data valueDiff
+     * Function:         Input variable valueDiff
      * Input Parameters: Type lowerLimit: the lower limit of input data, used to verify the validity of the input data
      *                   Type upperLimit: the upper limit of input data, used to verify the validity of the input data
      * Return Value:     void
      */
     void inputValueDiff(Type lowerLimit, Type upperLimit)
     {
-        while (true) {
-            cin >> m_valueDiff;
-            if (cin.good()) {
-                if (m_valueDiff >= lowerLimit && m_valueDiff <= upperLimit) {
-                    return;
-                }
-                else {
-                    cin.clear();
-                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                    cerr << "Error: Input data is not within the valid range, please check input data and try again." << endl;
-                }
-            }
-            else {
-                cin.clear();
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                cerr << "Error: Input data is invalid, please check data type and try again." << endl;
-            }
-        }
+        inputVariable(m_valueDiff, lowerLimit, upperLimit);
     }
 
     /*
