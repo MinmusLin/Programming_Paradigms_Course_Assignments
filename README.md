@@ -8,7 +8,7 @@ Programming_Paradigm_Course_Assignments
 
 A collection of my programming paradigm course assignments.
 
-> Relevant courses
+> Relevant course
 > * Programing Paradigm (同济大学程序设计范式)
 
 ## 解决方案项目组成
