@@ -6,7 +6,10 @@ Programming_Paradigm_Course_Assignments
 
 ## 解决方案简介
 
-`Programming_Paradigm_Course_Assignments` is a collection of my programming paradigm course assignments.
+A collection of my programming paradigm course assignments.
+
+> Relevant courses
+> * Programing Paradigm (同济大学程序设计范式)
 
 ## 解决方案项目组成
 
@@ -34,4 +37,4 @@ Programming_Paradigm_Course_Assignments
 
 ## 文档更新日期
 
-2023年11月21日
+2023年11月24日
