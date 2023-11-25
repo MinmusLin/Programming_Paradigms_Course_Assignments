@@ -13,7 +13,7 @@ A collection of my programming paradigm course assignments.
 
 ## 解决方案项目组成
 
-* Assignment 1-1
+* [Assignment 1-1](Assignment_1_1)
 股票价格的下一次上涨
 
 * Assignment 1-2
