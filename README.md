@@ -1,15 +1,15 @@
-# Programming Paradigm Course Assignments
+# Programming Paradigms Course Assignments
 
 ## 解决方案名称
 
-Programming_Paradigm_Course_Assignments
+Programming_Paradigms_Course_Assignments
 
 ## 解决方案简介
 
-A collection of my programming paradigm course assignments.
+A collection of my programming paradigms course assignments.
 
 > Relevant course
-> * Programing Paradigm 2023 (2023年同济大学程序设计范式)
+> * Programing Paradigms 2023 (2023年同济大学程序设计范式)
 
 ## 解决方案项目组成
 
@@ -46,4 +46,4 @@ A collection of my programming paradigm course assignments.
 
 ## 文档更新日期
 
-2024年1月13日
+2024年1月29日
