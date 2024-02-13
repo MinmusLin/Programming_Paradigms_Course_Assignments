@@ -1,17 +1,17 @@
 # Programming Paradigms Course Assignments
 
-## 解决方案名称
+## 仓库名称
 
 Programming_Paradigms_Course_Assignments
 
-## 解决方案简介
+## 仓库简介
 
 A collection of my programming paradigms course assignments.
 
 > Relevant course
 > * Programing Paradigms 2023 (2023年同济大学程序设计范式)
 
-## 解决方案项目组成
+## 仓库组成
 
 * [Assignment 1-1](Assignment_1_1)
 股票价格的下一次上涨
@@ -40,10 +40,6 @@ A collection of my programming paradigms course assignments.
 * [Assignment 3-3](Assignment_3_3)
 存在重复元素Ⅲ
 
-## 集成开发环境
-
-* Microsoft Visual Studio 2022
-
 ## 文档更新日期
 
-2024年1月29日
+2024年2月13日
