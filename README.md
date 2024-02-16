@@ -8,6 +8,8 @@ Programming_Paradigms_Course_Assignments
 
 A collection of my programming paradigms course assignments.
 
+2023年同济大学程序设计范式课程作业合集。
+
 > Relevant course
 > * Programing Paradigms 2023 (2023年同济大学程序设计范式)
 
@@ -42,4 +44,4 @@ A collection of my programming paradigms course assignments.
 
 ## 文档更新日期
 
-2024年2月13日
+2024年2月17日
