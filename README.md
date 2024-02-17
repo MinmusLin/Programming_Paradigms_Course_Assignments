@@ -45,6 +45,8 @@ A collection of my programming paradigms course assignments.
 * [Gomoku](Gomoku)
 五子棋AI对战程序
 
+## 相关仓库
+
 * [Teamfight Tactics](https://github.com/MinmusLin/Teamfight_Tactics)
 基于 [Cocos2d-x 3.17.2](https://docs.cocos.com/cocos2d-x/manual) 开发的金铲铲之战游戏项目
 
