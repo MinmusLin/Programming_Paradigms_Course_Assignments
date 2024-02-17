@@ -42,6 +42,9 @@ A collection of my programming paradigms course assignments.
 * [Assignment 3-3](Assignment_3_3)
 存在重复元素Ⅲ
 
+* [Gomoku](Gomoku)
+五子棋AI对战程序
+
 ## 文档更新日期
 
 2024年2月17日
