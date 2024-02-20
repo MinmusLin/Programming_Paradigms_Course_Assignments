@@ -2,7 +2,7 @@
  * Project Name:  Assignment_1_1
  * File Name:     assignment_1_1.cpp
  * File Function: Problem solution
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * Author:        Jishen Lin (æž—ç»§ç”³)
  * Update Date:   2023/10/11
  ****************************************************************/
 
@@ -10,11 +10,11 @@
  * Problem Description
  ****************************************************************/
 
-// ¹ÉÆ±¼Û¸ñµÄÏÂÒ»´ÎÉÏÕÇ
-//     ¸ø¶¨Ò»¸öÕûÊýÊý×é prices £¬±íÊ¾Á¬Ðø¼¸ÌìµÄ¹ÉÆ±¼Û¸ñ¡£·µ»ØÒ»¸öÊý×é answer £¬
-// ÆäÖÐ answer[i] ÊÇÖ¸¶ÔÓÚµÚ i Ìì£¬¹É¼ÛÏÂÒ»´ÎÉÏÕÇÊÇÔÚ¼¸Ììºó¡£Èç¹ûÔÚÕâÖ®ºó¹É¼Û¶¼
-// ²»»áÉÏÕÇ£¬ÇëÔÚ¸ÃÎ»ÖÃÓÃ 0 À´´úÌæ¡£
-// ÌáÊ¾£º
+// è‚¡ç¥¨ä»·æ ¼çš„ä¸‹ä¸€æ¬¡ä¸Šæ¶¨
+//     ç»™å®šä¸€ä¸ªæ•´æ•°æ•°ç»„ prices ï¼Œè¡¨ç¤ºè¿žç»­å‡ å¤©çš„è‚¡ç¥¨ä»·æ ¼ã€‚è¿”å›žä¸€ä¸ªæ•°ç»„ answer ï¼Œ
+// å…¶ä¸­ answer[i] æ˜¯æŒ‡å¯¹äºŽç¬¬ i å¤©ï¼Œè‚¡ä»·ä¸‹ä¸€æ¬¡ä¸Šæ¶¨æ˜¯åœ¨å‡ å¤©åŽã€‚å¦‚æžœåœ¨è¿™ä¹‹åŽè‚¡ä»·éƒ½
+// ä¸ä¼šä¸Šæ¶¨ï¼Œè¯·åœ¨è¯¥ä½ç½®ç”¨ 0 æ¥ä»£æ›¿ã€‚
+// æç¤ºï¼š
 //     1 <= prices.length <= 10^5
 //     30 <= prices[i] <= 100
 

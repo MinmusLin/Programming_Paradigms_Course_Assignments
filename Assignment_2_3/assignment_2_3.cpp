@@ -2,7 +2,7 @@
  * Project Name:  Assignment_2_3
  * File Name:     assignment_2_3.cpp
  * File Function: Problem solution
- * Author:        Jishen Lin (�ּ���)
+ * Author:        Jishen Lin (林继申)
  * Update Date:   2023/9/27
  ****************************************************************/
 
@@ -10,12 +10,12 @@
  * Problem Description
  ****************************************************************/
 
-// ��Ӱ��Ŀ�ϲ�
-//     ӰԺΪ�����ṩ��һϵ�е�Ӱ�Ĳ���ʱ�䰲�� intervals ������ÿ����Ӱ�Ĳ���ʱ����
-// �俪ʼ�ͽ�����ʱ���ǣ��� intervals[i] = [starti, endi] �����ڲ��ֵ�Ӱ���ص���
-// ����ʱ�䣬ӰԺ�����ϲ���Щʱ�䣬���ṩһ���µĲ���ʱ���������ϲ������ص��Ĳ���ʱ
-// �䣬������һ�����ص��Ĳ���ʱ�����飬��������ǡ�ø��������е�����ʱ�䡣
-// ��ʾ��
+// 电影节目合并
+//     影院为观众提供了一系列电影的播放时间安排 intervals ，其中每部电影的播放时间由
+// 其开始和结束的时间标记，即 intervals[i] = [starti, endi] 。由于部分电影有重叠的
+// 播放时间，影院决定合并这些时间，以提供一个新的播放时间表。请你合并所有重叠的播放时
+// 间，并返回一个不重叠的播放时间数组，该数组需恰好覆盖输入中的所有时间。
+// 提示：
 //     1 <= intervals.length <= 10^4
 //     intervals[i].length == 2
 //     0 <= starti <= endi <= 10^4

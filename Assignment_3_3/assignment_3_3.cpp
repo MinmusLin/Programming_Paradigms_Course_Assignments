@@ -2,7 +2,7 @@
  * Project Name:  Assignment_3_3
  * File Name:     assignment_3_3.cpp
  * File Function: Problem solution
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * Author:        Jishen Lin (æ—ç»§ç”³)
  * Update Date:   2023/10/14
  ****************************************************************/
 
@@ -10,14 +10,14 @@
  * Problem Description
  ****************************************************************/
 
-// ´æÔÚÖØ¸´ÔªËØ¢ó
-//     ¸øÄãÒ»¸öÕûÊıÊı×é nums ºÍÁ½¸öÕûÊı indexDiff ºÍ valueDiff ¡£
-// ÕÒ³öÊÇ·ñ´æÔÚÕâÑùµÄÁ½¸öÏÂ±ê (i, j) £º
+// å­˜åœ¨é‡å¤å…ƒç´ â…¢
+//     ç»™ä½ ä¸€ä¸ªæ•´æ•°æ•°ç»„ nums å’Œä¸¤ä¸ªæ•´æ•° indexDiff å’Œ valueDiff ã€‚
+// æ‰¾å‡ºæ˜¯å¦å­˜åœ¨è¿™æ ·çš„ä¸¤ä¸ªä¸‹æ ‡ (i, j) ï¼š
 //     i != j
 //     abs(i - j) <= indexDiff
 //     abs(nums[i] - nums[j]) <= valueDiff
-// Èç¹û´æÔÚ£¬·µ»Ø true £»·ñÔò£¬·µ»Ø false ¡£
-// ÌáÊ¾£º
+// å¦‚æœå­˜åœ¨ï¼Œè¿”å› true ï¼›å¦åˆ™ï¼Œè¿”å› false ã€‚
+// æç¤ºï¼š
 //     2 <= nums.length <= 10^5
 //     -10^9 <= nums[i] <= 10^9
 //     1 <= indexDiff <= nums.length

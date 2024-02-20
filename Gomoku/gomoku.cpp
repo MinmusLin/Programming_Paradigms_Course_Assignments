@@ -1,75 +1,75 @@
 /****************************************************************
  * Project Name:  Gomoku
  * File Name:     gomoku.cpp
- * File Function: Îå×ÓÆåAI¶ÔÕ½³ÌĞò
- * Author:        Jishen Lin (ÁÖ¼ÌÉê)
+ * File Function: äº”å­æ£‹AIå¯¹æˆ˜ç¨‹åº
+ * Author:        Jishen Lin (æ—ç»§ç”³)
  * Update Date:   2023/11/21
  ****************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
 
-#include <random>                                // C++ Ëæ»úÊıÉú³ÉÆ÷ºÍ·Ö²¼
-#include <algorithm>                             // C++ ±ê×¼Ä£°å¿â£¨·ºĞÍËã·¨×é¼ş£©
-#include <unordered_map>                         // C++ ±ê×¼Ä£°å¿â£¨¹şÏ£±í¹ØÁªÈİÆ÷£©
-#include <stdio.h>                               // C ÓïÑÔ±ê×¼ÊäÈëÊä³ö¿â
-#include <stdlib.h>                              // C ±ê×¼Í¨ÓÃ¹¤¾ß¿â
-#include <string.h>                              // C ·ç¸ñ×Ö·û´®´¦Àíº¯Êı¿â
-#include <time.h>                                // C ÈÕÆÚºÍÊ±¼ä´¦Àíº¯Êı¿â
+#include <random>                                // C++ éšæœºæ•°ç”Ÿæˆå™¨å’Œåˆ†å¸ƒ
+#include <algorithm>                             // C++ æ ‡å‡†æ¨¡æ¿åº“ï¼ˆæ³›å‹ç®—æ³•ç»„ä»¶ï¼‰
+#include <unordered_map>                         // C++ æ ‡å‡†æ¨¡æ¿åº“ï¼ˆå“ˆå¸Œè¡¨å…³è”å®¹å™¨ï¼‰
+#include <stdio.h>                               // C è¯­è¨€æ ‡å‡†è¾“å…¥è¾“å‡ºåº“
+#include <stdlib.h>                              // C æ ‡å‡†é€šç”¨å·¥å…·åº“
+#include <string.h>                              // C é£æ ¼å­—ç¬¦ä¸²å¤„ç†å‡½æ•°åº“
+#include <time.h>                                // C æ—¥æœŸå’Œæ—¶é—´å¤„ç†å‡½æ•°åº“
 
 /* Namespace */
-using ULL = unsigned long long;                  // 64 Î»ÎŞ·ûºÅÕûÊıÀàĞÍ
+using ULL = unsigned long long;                  // 64 ä½æ— ç¬¦å·æ•´æ•°ç±»å‹
 
 /* Conditional compilation */
-#define DEBUG_MODE 0                             // µ÷ÊÔÄ£Ê½¿ª¹Ø
+#define DEBUG_MODE 0                             // è°ƒè¯•æ¨¡å¼å¼€å…³
 
 /* Define Status type */
 typedef enum {
-    Empty,                                       // ¿ÕÎ»±êÖ¾
-    Black,                                       // ºÚÆå±êÖ¾
-    White                                        // °×Æå±êÖ¾
+    Empty,                                       // ç©ºä½æ ‡å¿—
+    Black,                                       // é»‘æ£‹æ ‡å¿—
+    White                                        // ç™½æ£‹æ ‡å¿—
 } Status;
 
 /* Define Move type */
 typedef struct {
-    int x;                                       // ĞĞÊı
-    int y;                                       // ÁĞÊı
-    int score;                                   // ÆÀ·Ö
+    int x;                                       // è¡Œæ•°
+    int y;                                       // åˆ—æ•°
+    int score;                                   // è¯„åˆ†
 } Move;
 
 /* Define HashEntry type */
 typedef struct {
-    int depth;                                   // Éî¶È
-    int score;                                   // ÆÀ·Ö
+    int depth;                                   // æ·±åº¦
+    int score;                                   // è¯„åˆ†
 } HashEntry;
 
 /* Define constant variables */
-const int OFFSET_X[] = { -1,-1,-1,0,0,1,1,1 };   // X ·½ÏòÆ«ÒÆÁ¿
-const int OFFSET_Y[] = { -1,0,1,-1,1,-1,0,1 };   // Y ·½ÏòÆ«ÒÆÁ¿
-const int BOARD_SIZE = 12;                       // ÆåÅÌ´óĞ¡
-const int INVALID_COORD = -1;                    // ÎŞĞ§×ø±ê
-const int MAX_SCORE = 1000000000;                // ×î¸ß·ÖÊı
-const int MIN_SCORE = -1000000000;               // ×îµÍ·ÖÊı
-const int FIVE_LINE = 10000000;                  // ÎåÁ¬·ÖÊı
-const int LIVE_FOUR = 100000;                    // »îËÄ·ÖÊı
-const int BLOCK_FOUR = 1000;                     // ³åËÄ·ÖÊı
-const int LIVE_THREE = 1000;                     // »îÈı·ÖÊı
-const int BLOCK_THREE = 100;                     // ³åÈı·ÖÊı
-const int LIVE_TWO = 100;                        // »î¶ş·ÖÊı
-const int BLOCK_TWO = 10;                        // ³å¶ş·ÖÊı
-const int LIVE_ONE = 10;                         // »îÒ»·ÖÊı
-const int BLOCK_ONE = 1;                         // ³åÒ»·ÖÊı
-const int SEARCH_DEPTH = 3;                      // ËÑË÷Éî¶È
+const int OFFSET_X[] = { -1,-1,-1,0,0,1,1,1 };   // X æ–¹å‘åç§»é‡
+const int OFFSET_Y[] = { -1,0,1,-1,1,-1,0,1 };   // Y æ–¹å‘åç§»é‡
+const int BOARD_SIZE = 12;                       // æ£‹ç›˜å¤§å°
+const int INVALID_COORD = -1;                    // æ— æ•ˆåæ ‡
+const int MAX_SCORE = 1000000000;                // æœ€é«˜åˆ†æ•°
+const int MIN_SCORE = -1000000000;               // æœ€ä½åˆ†æ•°
+const int FIVE_LINE = 10000000;                  // äº”è¿åˆ†æ•°
+const int LIVE_FOUR = 100000;                    // æ´»å››åˆ†æ•°
+const int BLOCK_FOUR = 1000;                     // å†²å››åˆ†æ•°
+const int LIVE_THREE = 1000;                     // æ´»ä¸‰åˆ†æ•°
+const int BLOCK_THREE = 100;                     // å†²ä¸‰åˆ†æ•°
+const int LIVE_TWO = 100;                        // æ´»äºŒåˆ†æ•°
+const int BLOCK_TWO = 10;                        // å†²äºŒåˆ†æ•°
+const int LIVE_ONE = 10;                         // æ´»ä¸€åˆ†æ•°
+const int BLOCK_ONE = 1;                         // å†²ä¸€åˆ†æ•°
+const int SEARCH_DEPTH = 3;                      // æœç´¢æ·±åº¦
 
 /* Define global variables */
-Status g_myFlag;                                 // ÎÒ·½Æå×Ó±êÖ¾
-Status g_enemyFlag;                              // ¶Ô·½Æå×Ó±êÖ¾
-Status g_board[BOARD_SIZE][BOARD_SIZE];          // ÆåÅÌĞÅÏ¢
-int g_myScore[BOARD_SIZE][BOARD_SIZE];           // ÎÒ·½·ÖÊı
-int g_enemyScore[BOARD_SIZE][BOARD_SIZE];        // ¶Ô·½·ÖÊı
-int g_stepCount;                                 // ²½ÊıÍ³¼Æ
-ULL g_zobristTable[BOARD_SIZE][BOARD_SIZE][3];   // Zobrist Êı
-ULL g_currentZobristHash;                        // µ±Ç° Zobrist ¹şÏ£Öµ
-std::unordered_map<ULL, HashEntry> g_transTable; // Zobrist ÖÃ»»±í
+Status g_myFlag;                                 // æˆ‘æ–¹æ£‹å­æ ‡å¿—
+Status g_enemyFlag;                              // å¯¹æ–¹æ£‹å­æ ‡å¿—
+Status g_board[BOARD_SIZE][BOARD_SIZE];          // æ£‹ç›˜ä¿¡æ¯
+int g_myScore[BOARD_SIZE][BOARD_SIZE];           // æˆ‘æ–¹åˆ†æ•°
+int g_enemyScore[BOARD_SIZE][BOARD_SIZE];        // å¯¹æ–¹åˆ†æ•°
+int g_stepCount;                                 // æ­¥æ•°ç»Ÿè®¡
+ULL g_zobristTable[BOARD_SIZE][BOARD_SIZE][3];   // Zobrist æ•°
+ULL g_currentZobristHash;                        // å½“å‰ Zobrist å“ˆå¸Œå€¼
+std::unordered_map<ULL, HashEntry> g_transTable; // Zobrist ç½®æ¢è¡¨
 
 #if DEBUG_MODE
 /*
@@ -99,11 +99,11 @@ void printBoard(void)
         fflush(stdout);
         for (int j = 0; j < BOARD_SIZE; j++) {
             if (g_board[i][j] == White) {
-                printf("|¡ñ");
+                printf("|â—");
                 fflush(stdout);
             }
             else if (g_board[i][j] == Black) {
-                printf("|¡ğ");
+                printf("|â—‹");
                 fflush(stdout);
             }
             else {
@@ -155,12 +155,12 @@ void printScore(void)
             printf("|");
             fflush(stdout);
             if (g_board[i][j] == g_myFlag) {
-                printf(g_myFlag == Black ? "¡ğ" : "¡ñ");
+                printf(g_myFlag == Black ? "â—‹" : "â—");
                 printf("%6d", g_myScore[i][j]);
                 fflush(stdout);
             }
             else if (g_board[i][j] == g_enemyFlag) {
-                printf(g_enemyFlag == Black ? "¡ğ" : "¡ñ");
+                printf(g_enemyFlag == Black ? "â—‹" : "â—");
                 printf("%6d", -g_enemyScore[i][j]);
                 fflush(stdout);
             }
@@ -253,150 +253,150 @@ int evaluateState(const int count, const int block, const int empty)
 {
     if (empty <= 0) {
         if (count >= 5) {
-            return FIVE_LINE;               // ÎåÁ¬
+            return FIVE_LINE;               // äº”è¿
         }
         if (block == 0) {
             switch (count) {
-                case 1: return LIVE_ONE;    // »îÒ»
-                case 2: return LIVE_TWO;    // »î¶ş
-                case 3: return LIVE_THREE;  // »îÈı
-                case 4: return LIVE_FOUR;   // »îËÄ
+                case 1: return LIVE_ONE;    // æ´»ä¸€
+                case 2: return LIVE_TWO;    // æ´»äºŒ
+                case 3: return LIVE_THREE;  // æ´»ä¸‰
+                case 4: return LIVE_FOUR;   // æ´»å››
                 default: break;
             }
         }
         if (block == 1) {
             switch (count) {
-                case 1: return BLOCK_ONE;   // ³åÒ»
-                case 2: return BLOCK_TWO;   // ³å¶ş
-                case 3: return BLOCK_THREE; // ³åÈı
-                case 4: return BLOCK_FOUR;  // ³åËÄ
+                case 1: return BLOCK_ONE;   // å†²ä¸€
+                case 2: return BLOCK_TWO;   // å†²äºŒ
+                case 3: return BLOCK_THREE; // å†²ä¸‰
+                case 4: return BLOCK_FOUR;  // å†²å››
                 default: break;
             }
         }
     } // end of if (empty <= 0)
     else if (empty == 1 || empty == count - 1) {
         if (count >= 6) {
-            return FIVE_LINE;               // ÎåÁ¬
+            return FIVE_LINE;               // äº”è¿
         }
         if (block == 0) {
             switch (count) {
-                case 2: return LIVE_TWO;    // »î¶ş
-                case 3: return LIVE_THREE;  // »îÈı
-                case 4: return BLOCK_FOUR;  // ³åËÄ
-                case 5: return LIVE_FOUR;   // »îËÄ
+                case 2: return LIVE_TWO;    // æ´»äºŒ
+                case 3: return LIVE_THREE;  // æ´»ä¸‰
+                case 4: return BLOCK_FOUR;  // å†²å››
+                case 5: return LIVE_FOUR;   // æ´»å››
                 default: break;
             }
         }
         if (block == 1) {
             switch (count) {
-                case 2: return BLOCK_TWO;   // ³å¶ş
-                case 3: return BLOCK_THREE; // ³åÈı
-                case 4: return BLOCK_FOUR;  // ³åËÄ
-                case 5: return BLOCK_FOUR;  // ³åËÄ
+                case 2: return BLOCK_TWO;   // å†²äºŒ
+                case 3: return BLOCK_THREE; // å†²ä¸‰
+                case 4: return BLOCK_FOUR;  // å†²å››
+                case 5: return BLOCK_FOUR;  // å†²å››
                 default: break;
             }
         }
     } // end of else if (empty == 1 || empty == count - 1)
     else if (empty == 2 || empty == count - 2) {
         if (count >= 7) {
-            return FIVE_LINE;               // ÎåÁ¬
+            return FIVE_LINE;               // äº”è¿
         }
         if (block == 0) {
             switch (count) {
-                case 3: return LIVE_THREE;  // »îÈı
-                case 4: return BLOCK_FOUR;  // ³åËÄ
-                case 5: return BLOCK_FOUR;  // ³åËÄ
-                case 6: return LIVE_FOUR;   // »îËÄ
+                case 3: return LIVE_THREE;  // æ´»ä¸‰
+                case 4: return BLOCK_FOUR;  // å†²å››
+                case 5: return BLOCK_FOUR;  // å†²å››
+                case 6: return LIVE_FOUR;   // æ´»å››
                 default: break;
             }
         }
         if (block == 1) {
             switch (count) {
-                case 3: return BLOCK_THREE; // ³åÈı
-                case 4: return BLOCK_FOUR;  // ³åËÄ
-                case 5: return BLOCK_FOUR;  // ³åËÄ
-                case 6: return LIVE_FOUR;   // »îËÄ
+                case 3: return BLOCK_THREE; // å†²ä¸‰
+                case 4: return BLOCK_FOUR;  // å†²å››
+                case 5: return BLOCK_FOUR;  // å†²å››
+                case 6: return LIVE_FOUR;   // æ´»å››
                 default: break;
             }
         }
         if (block == 2) {
             switch (count) {
-                case 4: return BLOCK_FOUR;  // ³åËÄ
-                case 5: return BLOCK_FOUR;  // ³åËÄ
-                case 6: return BLOCK_FOUR;  // ³åËÄ
+                case 4: return BLOCK_FOUR;  // å†²å››
+                case 5: return BLOCK_FOUR;  // å†²å››
+                case 6: return BLOCK_FOUR;  // å†²å››
                 default: break;
             }
         }
     } // end of else if (empty == 2 || empty == count - 2)
     else if (empty == 3 || empty == count - 3) {
         if (count >= 8) {
-            return FIVE_LINE;               // ÎåÁ¬
+            return FIVE_LINE;               // äº”è¿
         }
         if (block == 0) {
             switch (count) {
-                case 4: return LIVE_THREE;  // »îÈı
-                case 5: return LIVE_THREE;  // »îÈı
-                case 6: return BLOCK_FOUR;  // ³åËÄ
-                case 7: return LIVE_FOUR;   // »îËÄ
+                case 4: return LIVE_THREE;  // æ´»ä¸‰
+                case 5: return LIVE_THREE;  // æ´»ä¸‰
+                case 6: return BLOCK_FOUR;  // å†²å››
+                case 7: return LIVE_FOUR;   // æ´»å››
                 default: break;
             }
         }
         if (block == 1) {
             switch (count) {
-                case 4: return BLOCK_FOUR;  // ³åËÄ
-                case 5: return BLOCK_FOUR;  // ³åËÄ
-                case 6: return BLOCK_FOUR;  // ³åËÄ
-                case 7: return LIVE_FOUR;   // »îËÄ
+                case 4: return BLOCK_FOUR;  // å†²å››
+                case 5: return BLOCK_FOUR;  // å†²å››
+                case 6: return BLOCK_FOUR;  // å†²å››
+                case 7: return LIVE_FOUR;   // æ´»å››
                 default: break;
             }
         }
         if (block == 2) {
             switch (count) {
-                case 4: return BLOCK_FOUR;  // ³åËÄ
-                case 5: return BLOCK_FOUR;  // ³åËÄ
-                case 6: return BLOCK_FOUR;  // ³åËÄ
-                case 7: return BLOCK_FOUR;  // ³åËÄ
+                case 4: return BLOCK_FOUR;  // å†²å››
+                case 5: return BLOCK_FOUR;  // å†²å››
+                case 6: return BLOCK_FOUR;  // å†²å››
+                case 7: return BLOCK_FOUR;  // å†²å››
                 default: break;
             }
         }
     } // end of else if (empty == 3 || empty == count - 3)
     else if (empty == 4 || empty == count - 4) {
         if (count >= 9) {
-            return FIVE_LINE;               // ÎåÁ¬
+            return FIVE_LINE;               // äº”è¿
         }
         if (block == 0) {
             switch (count) {
-                case 5: return LIVE_FOUR;   // »îËÄ
-                case 6: return LIVE_FOUR;   // »îËÄ
-                case 7: return LIVE_FOUR;   // »îËÄ
-                case 8: return LIVE_FOUR;   // »îËÄ
+                case 5: return LIVE_FOUR;   // æ´»å››
+                case 6: return LIVE_FOUR;   // æ´»å››
+                case 7: return LIVE_FOUR;   // æ´»å››
+                case 8: return LIVE_FOUR;   // æ´»å››
                 default: break;
             }
         }
         if (block == 1) {
             switch (count) {
-                case 4: return BLOCK_FOUR;  // ³åËÄ
-                case 5: return BLOCK_FOUR;  // ³åËÄ
-                case 6: return BLOCK_FOUR;  // ³åËÄ
-                case 7: return BLOCK_FOUR;  // ³åËÄ
-                case 8: return LIVE_FOUR;   // »îËÄ
+                case 4: return BLOCK_FOUR;  // å†²å››
+                case 5: return BLOCK_FOUR;  // å†²å››
+                case 6: return BLOCK_FOUR;  // å†²å››
+                case 7: return BLOCK_FOUR;  // å†²å››
+                case 8: return LIVE_FOUR;   // æ´»å››
                 default: break;
             }
         }
         if (block == 2) {
             switch (count) {
-                case 5: return BLOCK_FOUR;  // ³åËÄ
-                case 6: return BLOCK_FOUR;  // ³åËÄ
-                case 7: return BLOCK_FOUR;  // ³åËÄ
-                case 8: return BLOCK_FOUR;  // ³åËÄ
+                case 5: return BLOCK_FOUR;  // å†²å››
+                case 6: return BLOCK_FOUR;  // å†²å››
+                case 7: return BLOCK_FOUR;  // å†²å››
+                case 8: return BLOCK_FOUR;  // å†²å››
                 default: break;
             }
         }
     } // end of else if (empty == 4 || empty == count - 4)
     else if (empty == 5 || empty == count - 5) {
-        return FIVE_LINE;                   // ÎåÁ¬
+        return FIVE_LINE;                   // äº”è¿
     } // end of else if (empty == 5 || empty == count - 5)
-    return 0;                               // È±Ê¡
+    return 0;                               // ç¼ºçœ
 }
 
 /*
