@@ -14,53 +14,83 @@
 ## 测试用例
 
 * Test Case 1:
+
   Description: Test the correctness of the algorithm
+
   Input: 7 1 5 3 6 4 '\n'
+
   Expected Output: 5
 
 * Test Case 2:
+
   Description: Test the correctness of the algorithm
+
   Input: 7 6 4 3 1 '\n'
+
   Expected Output: 0
 
 * Test Case 3:
+
   Description: Test the correctness of the algorithm
+
   Input: 0 '\n'
+
   Expected Output: 0
 
 * Test Case 4:
+
   Description: Test the handling of input data exceeding the upper limit
+
   Input: 10001 '\n'
+
   Expected Output: Error
 
 * Test Case 5:
+
   Description: Test the handling of input data exceeding the upper limit
+
   Input: 50 60 12000 50 80 '\n'
+
   Expected Output: Error
 
 * Test Case 6:
+
   Description: Test the handling of input data below the lower limit
+
   Input: -1 '\n'
+
   Expected Output: Error
 
 * Test Case 7:
+
   Description: Test the handling of input data below the lower limit
+
   Input: 95 45 30 -20 98 20 '\n'
+
   Expected Output: Error
 
 * Test Case 8:
+
   Description: Test the handling of input data with unreasonable length
+
   Input: '\n'
+
   Expected Output: Error
 
 * Test Case 9:
+
   Description: Test the handling of incorrect input data types
+
   Input: a bcd '\n'
+
   Expected Output: Error
 
 * Test Case 10:
+
   Description: Test the handling of incorrect input data types
+
   Input: 50.5 '\n'
+  
   Expected Output: Error
 
 ## 文档更新日期
