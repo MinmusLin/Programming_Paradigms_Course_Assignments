@@ -713,14 +713,6 @@ int negamaxAlphaBeta(const int depth, int alpha, const int beta, const Status fl
 }
 ```
 
-## 集成开发环境
-
-* Microsoft Visual Studio 2022
-
-## 编译运行环境
-
-* 本项目适用于x86和x64架构
-
 ## 文档更新日期
 
 2023年12月14日
