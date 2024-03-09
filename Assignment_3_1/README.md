@@ -93,6 +93,18 @@
   
   Expected Output: Error
 
+## 项目构建命令
+
+```
+mkdir build
+cd build
+cmake ..
+```
+
+## 编译运行环境
+
+* 本项目适用于x86和x64架构
+
 ## 文档更新日期
 
-2024年2月20日
+2024年3月10日

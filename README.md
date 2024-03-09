@@ -10,7 +10,7 @@ A collection of my programming paradigms course assignments.
 
 2023年同济大学程序设计范式课程作业合集。
 
-> Relevant course
+> ***Relevant course***
 > * Programing Paradigms 2023 (2023年同济大学程序设计范式)
 
 ## 仓库组成
@@ -52,4 +52,4 @@ A collection of my programming paradigms course assignments.
 
 ## 文档更新日期
 
-2024年2月17日
+2024年3月10日

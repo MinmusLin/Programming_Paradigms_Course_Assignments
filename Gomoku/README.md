@@ -713,6 +713,18 @@ int negamaxAlphaBeta(const int depth, int alpha, const int beta, const Status fl
 }
 ```
 
+## 项目构建命令
+
+```
+mkdir build
+cd build
+cmake ..
+```
+
+## 编译运行环境
+
+* 本项目适用于x86和x64架构
+
 ## 文档更新日期
 
-2023年12月14日
+2024年3月10日
